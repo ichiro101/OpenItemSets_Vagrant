@@ -27,7 +27,7 @@ end
  
  
 db_to_create.each do |db_name|
-  execute "create-database" do
+  execute "create-database #{db_name}" do
       exists = <<-EOH
       sudo -u postgres psql -U postgres -c "select * from pg_database WHERE datname='#{db_name}'" | grep -c #{db_name}
       EOH
