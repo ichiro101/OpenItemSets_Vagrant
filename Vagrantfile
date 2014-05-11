@@ -103,9 +103,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "default_ruby" => "2.1.2"
       }
     }
+
     chef.add_recipe "apt"
+    chef.add_recipe "redis::install"
     chef.add_recipe "rvm::system"
     chef.add_recipe "rvm::vagrant"
+    chef.add_recipe "ois"
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
