@@ -101,6 +101,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = {
       "rvm" => {
         "default_ruby" => "2.1.2"
+      },
+      "postgresql" => {
+        "password" => {
+          "postgres" => "dev_password"
+        }
       }
     }
 
@@ -108,6 +113,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "redis::install"
     chef.add_recipe "rvm::system"
     chef.add_recipe "rvm::vagrant"
+    chef.add_recipe "postgresql::server"
     chef.add_recipe "ois"
   end
 
