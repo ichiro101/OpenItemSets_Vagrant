@@ -117,6 +117,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "ois"
   end
 
+  config.vm.provision "shell", 
+    :path => "setup_database.sh", 
+    :run => "once"
+
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
   #
