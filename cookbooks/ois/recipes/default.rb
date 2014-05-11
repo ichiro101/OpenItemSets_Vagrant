@@ -5,7 +5,7 @@ packages_to_install = [
 ]
 
 db_user = "vagrant"
-db_name = [
+db_to_create = [
   "OpenItemSets_development",
   "OpenItemSets_test"
 ]
