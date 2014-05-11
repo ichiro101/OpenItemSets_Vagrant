@@ -10,20 +10,18 @@ db_to_create = [
   "OpenItemSets_test"
 ]
 
+current_release_directory = "/vagrant/openitemsets_web"
+
 # install the required packages
 packages_to_install.each do |item|
   package item
 end
 
-execute "bundle install" do
-  cwd "/vagrant/openitemsets_web"
-end
-
 execute "create-database-user" do
     code = <<-EOH
-    psql -U postgres -c "select * from pg_user where usename='#{db_user}'" | grep -c #{db_user}
+    sudo -u postgres psql -U postgres -c "select * from pg_user where usename='#{db_user}'" | grep -c #{db_user}
     EOH
-    command "createuser -U postgres -sw #{db_user}"
+    command "sudo -u postgres createuser -U postgres -sw #{db_user}"
     not_if code 
 end
  
@@ -31,9 +29,17 @@ end
 db_to_create.each do |db_name|
   execute "create-database" do
       exists = <<-EOH
-      psql -U postgres -c "select * from pg_database WHERE datname='#{db_name}'" | grep -c #{db_name}
+      sudo -u postgres psql -U postgres -c "select * from pg_database WHERE datname='#{db_name}'" | grep -c #{db_name}
       EOH
-      command "createdb -U postgres -O #{db_user} -E utf8 -T template0 #{db_name}"
+      command "sudo -u postgres createdb -U postgres -O #{db_user} -E utf8 -l en_US.UTF8 -T template0 #{db_name}"
       not_if exists
   end
+end
+
+script 'Bundling the gems' do
+  interpreter 'bash'
+  cwd current_release_directory
+  code <<-EOS
+    bundle install
+  EOS
 end
