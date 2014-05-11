@@ -1,0 +1,3 @@
+[submodule "openitemsets_web"]
+	path = openitemsets_web
+	url = git@github.com:ichiro101/openitemsets_web.git
