@@ -36,10 +36,9 @@ db_to_create.each do |db_name|
   end
 end
 
-script 'Bundling the gems' do
-  interpreter 'bash'
-  cwd current_release_directory
-  code <<-EOS
-    bundle install
-  EOS
+rvm_shell "bundle install" do
+  ruby_string "2.1.2"
+  user        "root"
+  cwd         current_release_directory
+  code        %{bundle install}
 end
