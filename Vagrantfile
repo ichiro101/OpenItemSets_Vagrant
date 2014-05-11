@@ -103,18 +103,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "default_ruby" => "2.1.2"
       },
       "postgresql" => {
-        "initdb_locale" => "en_US.UTF-8",
+        "initdb_locale" => "C",
         "password" => {
           "postgres" => "dev_password"
         }
       }
     }
 
+    chef.add_recipe "locale"
     chef.add_recipe "apt"
+    chef.add_recipe "postgresql::server"
     chef.add_recipe "redis::install"
     chef.add_recipe "rvm::system"
     chef.add_recipe "rvm::vagrant"
-    chef.add_recipe "postgresql::server"
     chef.add_recipe "ois"
   end
 

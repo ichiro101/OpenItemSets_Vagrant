@@ -19,6 +19,11 @@
 # limitations under the License.
 #
 
+
+# this is a hack around the en_US locale that is somehow getting set..
+# there is no reason to be using en_US for any reason
+ENV['LC_ALL'] = 'C'
+
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
 include_recipe "postgresql::client"
