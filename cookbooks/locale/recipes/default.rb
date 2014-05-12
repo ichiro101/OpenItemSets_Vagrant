@@ -37,3 +37,6 @@ if platform?("redhat", "centos", "fedora")
 
 end
 
+
+ENV['LC_ALL'] = node[:locale][:lang]
+ENV['LANG'] = node[:locale][:lang]
