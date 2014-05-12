@@ -103,7 +103,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "default_ruby" => "2.1.2"
       },
       "postgresql" => {
-        "initdb_locale" => "C",
         "password" => {
           "postgres" => "dev_password"
         }
