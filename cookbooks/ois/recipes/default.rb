@@ -69,7 +69,17 @@ template "/etc/init/thin.conf" do
   action :create
 end
 
+template "/etc/init/redmon.conf" do
+  source "redmon.conf.erb"
+  action :create
+end
+
 rvm_gem "thin" do
+  ruby_string "2.1.2"
+  action :install
+end
+
+rvm_gem "redmon" do
   ruby_string "2.1.2"
   action :install
 end
@@ -79,7 +89,17 @@ rvm_wrapper "sys" do
   binary "thin"
 end
 
+rvm_wrapper "sys" do
+  ruby_string "2.1.2"
+  binary "redmon"
+end
+
 service "thin" do
+  provider Chef::Provider::Service::Upstart
+  action [:enable, :start]
+end
+
+service "redmon" do
   provider Chef::Provider::Service::Upstart
   action [:enable, :start]
 end

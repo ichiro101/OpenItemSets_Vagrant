@@ -1,0 +1,12 @@
+description "redmon"
+version "1.0"
+author "Ichiro Yamamoto"
+ 
+env LANG=en_US.UTF-8
+ 
+respawn
+start on runlevel [23]
+ 
+script
+    sudo -u vagrant <%= node['rvm']['root_path'] %>/bin/sys_redmon
+end script
