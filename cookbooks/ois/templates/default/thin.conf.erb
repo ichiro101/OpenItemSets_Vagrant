@@ -1,0 +1,14 @@
+description "thin"
+version "1.0"
+author "Travis Reeder"
+ 
+env LANG=en_US.UTF-8
+env APP_HOME=<%= @app_directory %>
+ 
+respawn
+start on runlevel [23]
+ 
+script
+    cd $APP_HOME
+    sudo -u vagrant <%= node['rvm']['root_path'] %>/bin/sys_thin start -e <%= @environment %> -p <%= @port %> > $APP_HOME/log/thin.log 2>&1
+end script
